@@ -22,14 +22,14 @@
       <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/></svg>
       <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
         <strong class="d-block text-gray-dark text-right small">Actualizado el: <%=rente.updated_at%></strong>
-        Id del Alquiler: <%=rente.id%> 
-			   Pelicula: <%=rente.movie_id%>
+        Pelicula: <%=rente.title%> 
+         Cliente: <%=rente.name%>
 
          <%= link_to "Editar", edit_rented_path(rente)%>
          <%= link_to "Borrar", rente, method: :delete, data:{confirm:"Eliminar?"}%>
       
          
-		</p>
+    </p>
       </p>
     </div>
 <%end%>  
@@ -45,8 +45,8 @@
       <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
       <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
         <strong class="d-block text-gray-dark text-right small">Actualizado el: <%=serie.updated_at%></strong>
-        Id del Alquiler: <%=serie.id%> 
-         Serie: <%=serie.serie_id%>
+         Serie: <%=serie.title%>
+         Cliente: <%=serie.name%>
          <%= link_to "Editar", edit_rented_path(serie)%>
          <%= link_to "Borrar", serie, method: :delete, data:{confirm:"Eliminar?"}%>
     </p>
@@ -58,7 +58,7 @@
 
     </small>
   </div>
-	<!-- Button trigger modal -->
+  <!-- Button trigger modal -->
 
 <%= form_for @rented do |f| %>
 <!-- Modal -->
@@ -74,7 +74,7 @@
       <div class="modal-body">
         <input name="rented[movie_id]" type="hidden" value="" />
 <div class="form-group">
-	<label for="recipient-serie" class="col-form-label">Serie:</label>
+  <label for="recipient-serie" class="col-form-label">Serie:</label>
       <select class="form-control" id="serie" name="rented[serie_id]" required>
       <option value="">Seleccione una Serie</option>
       <% @series.each do |serie| %>

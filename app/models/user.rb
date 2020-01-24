@@ -1,3 +1,3 @@
 class User < ActiveRecord::Base
-	has_many :rented
+	has_many :renteds
 end
