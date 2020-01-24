@@ -1,0 +1,56 @@
+<%= form_for @rented do |f| %>
+<!-- Modal -->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+
+      </div>
+      <div class="modal-body">
+
+<%if @rented.serie_id == nil %>
+<input name="rented[movie_id]" type="hidden" value="" />
+<div class="form-group">
+  <label for="recipient-movie" class="col-form-label">Pelicula:</label>
+      <select class="form-control" id="movie" name="rented[serie_id]" required>
+      <option value="">Seleccione una Pelicula</option>
+      <% @movies.each do |movie| %>
+      	<option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+<%else%>
+	<input name="rented[serie_id]" type="hidden" value="" />
+<div class="form-group">
+  <label for="recipient-movie" class="col-form-label">Serie:</label>
+      <select class="form-control" id="movie" name="rented[movie_id]" required>
+      <option value=""><%=%></option>
+      <% @series.each do |movie| %>
+      	<option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+<%end%>
+
+
+<div class="form-group">
+  <label for="recipient-serie" class="col-form-label">Cliente:</label>
+      <select class="form-control" id="serie" name="rented[user_id]" required>
+      <option value="">Seleccione un Cliente</option>
+      <% @users.each do |client| %>
+      <option value="<%=client.id%>"><%=client.name%> (<%=client.email%>)</option>
+      <%end%>
+    </select>
+</div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-secondary" href="/index">Cancelar</a>
+        <input type="submit" name="commit" value="Actualizar" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+
+<% end %>

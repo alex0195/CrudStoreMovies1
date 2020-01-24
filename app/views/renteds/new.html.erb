@@ -1,0 +1,20 @@
+<%= form_for @rented do |f| %>
+<div>
+	<p>
+		<%= f.label :typesm%>
+		<%= f.number_field :typesm%>
+	</p>
+
+	<p>
+		<%= f.label :element%>
+		<%= f.text_field :element%>
+	</p>
+
+	<p>
+		<%= f.label :client%>
+		<%= f.text_field :client%>
+	</p>
+
+		<%= f.submit %>
+</div>
+<% end %>

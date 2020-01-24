@@ -1,0 +1,180 @@
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalSeries">
+        Arrendar Serie
+      </button>
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMovies">
+        Arrendar Pelicula
+      </button>
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCliente">
+        Agregar Cliente
+      </button>
+
+      <a class="btn btn-warning" href="/users">
+        Gestionar Clientes
+      </a>
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Peliculas Arrendadas:</h6>
+<% @peliculas.each do |rente| %>
+    <div class="media text-muted pt-3">
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/></svg>
+      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark text-right small">Actualizado el: <%=rente.updated_at%></strong>
+        Id del Alquiler: <%=rente.id%> 
+			   Pelicula: <%=rente.movie_id%>
+
+         <%= link_to "Editar", edit_rented_path(rente)%>
+         <%= link_to "Borrar", rente, method: :delete, data:{confirm:"Eliminar?"}%>
+      
+         
+		</p>
+      </p>
+    </div>
+<%end%>  
+
+    </small>
+  </div>
+
+
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Series Arrendadas:</h6>
+<% @aseries.each do |serie| %>
+    <div class="media text-muted pt-3">
+      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark text-right small">Actualizado el: <%=serie.updated_at%></strong>
+        Id del Alquiler: <%=serie.id%> 
+         Serie: <%=serie.serie_id%>
+         <%= link_to "Editar", edit_rented_path(serie)%>
+         <%= link_to "Borrar", serie, method: :delete, data:{confirm:"Eliminar?"}%>
+    </p>
+      </p>
+    </div>
+<%end%>  
+
+    <small class="d-block text-right mt-3">
+
+    </small>
+  </div>
+	<!-- Button trigger modal -->
+
+<%= form_for @rented do |f| %>
+<!-- Modal -->
+<div class="modal fade" id="modalSeries" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Arrendar Serie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input name="rented[movie_id]" type="hidden" value="" />
+<div class="form-group">
+	<label for="recipient-serie" class="col-form-label">Serie:</label>
+      <select class="form-control" id="serie" name="rented[serie_id]" required>
+      <option value="">Seleccione una Serie</option>
+      <% @series.each do |serie| %>
+      <option value="<%=serie.id%>"><%=serie.title%> (<%=serie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+<div class="form-group">
+  <label for="recipient-serie" class="col-form-label">Cliente:</label>
+      <select class="form-control" id="serie" name="rented[user_id]" required>
+      <option value="">Seleccione un Cliente</option>
+      <% @users.each do |client| %>
+      <option value="<%=client.id%>"><%=client.name%> (<%=client.email%>)</option>
+      <%end%>
+    </select>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input type="submit" name="commit" value="Arrendar" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<%= form_for @rented do |f| %>
+<!-- Modal -->
+<div class="modal fade" id="modalMovies" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Arrendar Pelicula</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input name="rented[serie_id]" type="hidden" value="" />
+<div class="form-group">
+  <label for="recipient-movie" class="col-form-label">Pelicula:</label>
+      <select class="form-control" id="movie" name="rented[movie_id]" required>
+      <option value="">Seleccione una Pelicula</option>
+      <% @movies.each do |movie| %>
+      <option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+<div class="form-group">
+  <label for="recipient-serie" class="col-form-label">Cliente:</label>
+      <select class="form-control" id="serie" name="rented[user_id]" required>
+      <option value="">Seleccione un Cliente</option>
+      <% @users.each do |client| %>
+      <option value="<%=client.id%>"><%=client.name%> (<%=client.email%>)</option>
+      <%end%>
+    </select>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input type="submit" name="commit" value="Arrendar" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<%= form_for @user do |f| %>
+<!-- Modal -->
+<div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo Cliente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+<div class="form-group">
+  <label for="recipient-user" class="col-form-label">Nombre:</label>
+  <input type="text" class="form-control" id="user" name="user[name]" required>
+</div>
+<div class="form-group">
+  <label for="recipient-email" class="col-form-label">Nombre:</label>
+  <input type="email" class="form-control" id="email" name="user[email]" required>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <input type="submit" name="commit" value="Crear Usuario" class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
