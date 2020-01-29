@@ -72,19 +72,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <input name="rented[movie_id]" type="hidden" value="" />
-<div class="form-group">
-  <label for="recipient-serie" class="col-form-label">Serie:</label>
-      <select class="form-control" id="serie" name="rented[serie_id]" required>
-      <option value="">Seleccione una Serie</option>
-      <% @series.each do |serie| %>
-      <option value="<%=serie.id%>"><%=serie.title%> (<%=serie.gender%>)</option>
-      <%end%>
-    </select>
-</div>
+        <input name="movie_id" type="hidden" value="0" />
+
 <div class="form-group">
   <label for="recipient-serie" class="col-form-label">Cliente:</label>
-      <select class="form-control" id="serie" name="rented[user_id]" required>
+      <select class="form-control" id="cliente" name="user_id" required>
       <option value="">Seleccione un Cliente</option>
       <% @users.each do |client| %>
       <option value="<%=client.id%>"><%=client.name%> (<%=client.email%>)</option>
@@ -92,6 +84,20 @@
     </select>
 </div>
 
+<div class="form-group">
+  <label for="recipient-serie" class="col-form-label">Serie:</label>
+      <select class="form-control" multiple id="serie" name="serie_id[]" required data-placeholder="a">
+      <option value="">Seleccione una Serie</option>
+      <% @series.each do |serie| %>
+          <option value="<%=serie.id%>"><%=serie.title%> (<%=serie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+<script>
+   $(document).ready(function() { 
+    //$('#serie').chosen();
+   });
+</script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -115,25 +121,27 @@
         </button>
       </div>
       <div class="modal-body">
-        <input name="rented[serie_id]" type="hidden" value="" />
-<div class="form-group">
-  <label for="recipient-movie" class="col-form-label">Pelicula:</label>
-      <select class="form-control" id="movie" name="rented[movie_id]" required>
-      <option value="">Seleccione una Pelicula</option>
-      <% @movies.each do |movie| %>
-      <option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
-      <%end%>
-    </select>
-</div>
+        <input name="serie_id" type="hidden" value="0" />
 <div class="form-group">
   <label for="recipient-serie" class="col-form-label">Cliente:</label>
-      <select class="form-control" id="serie" name="rented[user_id]" required>
+      <select class="form-control" id="serie" name="user_id" required>
       <option value="">Seleccione un Cliente</option>
       <% @users.each do |client| %>
       <option value="<%=client.id%>"><%=client.name%> (<%=client.email%>)</option>
       <%end%>
     </select>
 </div>
+<div class="form-group">
+  <label for="recipient-movie" class="col-form-label">Pelicula:</label>
+  <select class="form-control" multiple id="movie" name="movie_id[]" required data-placeholder="a">
+    
+      <option value="">Seleccione una Pelicula</option>
+      <% @movies.each do |movie| %>
+      <option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
+      <%end%>
+    </select>
+</div>
+
 
       </div>
       <div class="modal-footer">

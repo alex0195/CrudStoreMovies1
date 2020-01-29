@@ -8,12 +8,21 @@ class RentedsController < ApplicationController
 	end
 
 	def create
-		@rented = Rented.new(rented_params)
-		if @rented.save
-			redirect_to index_path
+		@serie = params[:serie_id]
+		if @serie == "0"
+			@pelicula = params[:movie_id]
+			@pelicula.each do |movie|
+				Rails.logger.debug(movie)
+				Rented.create(movie_id: movie, serie_id:params[:serie_id], user_id: params[:user_id])
+			end
 		else
-			render :new
+			@serie.each do |serie|
+				Rails.logger.debug(serie)
+				Rented.create(movie_id: params[:movie_id], serie_id:serie, user_id: params[:user_id])
+			end
 		end
+
+			redirect_to index_path
 	end
 
 	def edit
@@ -41,7 +50,7 @@ class RentedsController < ApplicationController
 
 	private
 		def rented_params
-			params.require(:rented).permit(:movie_id,:serie_id,:user_id)
+			params.require(:movie_id,:serie_id,:user_id)
 		end	
 
 end
