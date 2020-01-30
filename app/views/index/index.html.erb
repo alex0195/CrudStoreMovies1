@@ -25,7 +25,7 @@
         Pelicula: <%=rente.title%> 
          Cliente: <%=rente.name%>
 
-         <%= link_to "Editar", edit_rented_path(rente)%>
+         <%= link_to "Editar", edit_rented_path(rente.id)%>
          <%= link_to "Borrar", rente, method: :delete, data:{confirm:"Eliminar?"}%>
       
          
@@ -86,18 +86,14 @@
 
 <div class="form-group">
   <label for="recipient-serie" class="col-form-label">Serie:</label>
-      <select class="form-control" multiple id="serie" name="serie_id[]" required data-placeholder="a">
+      <select class="form-control" multiple id="serie" name="serie_id[]" required data-placeholder="Seleccione">
       <option value="">Seleccione una Serie</option>
       <% @series.each do |serie| %>
           <option value="<%=serie.id%>"><%=serie.title%> (<%=serie.gender%>)</option>
       <%end%>
     </select>
 </div>
-<script>
-   $(document).ready(function() { 
-    //$('#serie').chosen();
-   });
-</script>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -133,8 +129,8 @@
 </div>
 <div class="form-group">
   <label for="recipient-movie" class="col-form-label">Pelicula:</label>
-  <select class="form-control" multiple id="movie" name="movie_id[]" required data-placeholder="a">
-    
+  <select class="form-control" multiple id="movie" name="movie_id[]" required data-placeholder="Seleccione">
+  
       <option value="">Seleccione una Pelicula</option>
       <% @movies.each do |movie| %>
       <option value="<%=movie.id%>"><%=movie.title%> (<%=movie.gender%>)</option>
@@ -186,3 +182,15 @@
 </div>
 
 <% end %>
+<script>
+   $(document).ready(function() {
+     $('#movie').chosen();
+     $('#serie').chosen();
+     $('#modalMovies').on('shown.bs.modal', function () {
+      $('#movie', this).chosen('destroy').chosen();
+    });
+      $('#modalSeries').on('shown.bs.modal', function () {
+      $('#serie', this).chosen('destroy').chosen();
+    }); 
+   });
+</script>
